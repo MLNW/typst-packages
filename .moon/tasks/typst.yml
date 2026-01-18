@@ -1,0 +1,65 @@
+inheritedBy:
+  language: typst
+
+fileGroups:
+  sources:
+    - "src/**/*"
+  tests:
+    - "tests/**/*"
+  tyler:
+    - "/package.json"
+    - "/bun.lock"
+
+tasks:
+  test:
+    description: "Run Typst tests with Tytanic."
+    command: tt run --no-fail-fast
+    inputs:
+      - "@group(sources)"
+      - "@group(tests)"
+
+  test-update:
+    description: "Update Typst rendering tests with Tytanic."
+    command: tt update
+    inputs:
+      - "@group(sources)"
+      - "@group(tests)"
+    options:
+      runInCI: false
+
+  test-new:
+    description: "Create new Typst rendering tests with Tytanic."
+    command: tt new
+    options:
+      interactive: true
+
+  format:
+    description: "Format with typstyle."
+    command: typstyle . --inplace --timing
+    toolchain: rust
+    inputs:
+      - "@group(sources)"
+      - "@group(tests)"
+
+  build:
+    description: "Build Typst package."
+    command:
+      - bun
+      - run
+      - tyler
+      - build
+      - "@in(0)"
+      - --no-bump
+      - --install
+    toolchain: typescript
+    inputs:
+      - "typst.toml"
+      - "README.md"
+      - "LICENSE"
+      - "@group(sources)"
+      - "@group(tyler)"
+    outputs:
+      - "dist/**"
+    deps:
+      - "test"
+      - "format"

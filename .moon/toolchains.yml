@@ -1,0 +1,7 @@
+typescript:
+  packageManager: "bun"
+
+rust:
+  version: ~1.92
+  bins:
+    - "typstyle"

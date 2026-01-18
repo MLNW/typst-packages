@@ -1,0 +1,17 @@
+# https://moonrepo.dev/docs/config/workspace
+$schema: "./cache/schemas/workspace.json"
+
+vcs:
+  defaultBranch: "trunk"
+  hooks:
+    pre-commit:
+      - "pre-commit run"
+      - "moon run :test --affected"
+  # Enable hooks for everyone
+  sync: true
+
+projects:
+  - "."
+  - "packages/*"
+
+defaultProject: "typst-packages"

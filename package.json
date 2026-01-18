@@ -1,0 +1,12 @@
+{
+  "name": "typst-packages",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "templates/*"
+  ],
+  "devDependencies": {
+    "@changesets/cli": "^2.29.8",
+    "@mkpoli/tyler": "^0.7.2"
+  }
+}

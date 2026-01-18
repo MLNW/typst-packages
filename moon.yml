@@ -1,0 +1,28 @@
+language: javascript
+
+project:
+  name: "typst-packages"
+  description: "A collection of Typst packages and libraries."
+  maintainers:
+    - "Lucas Resch"
+
+tasks:
+  change:
+    description: "Create a new changeset."
+    command:
+      - bun
+      - changeset
+      - add
+    toolchain: bun
+    options:
+      interactive: true
+
+  version:
+    description: "Bump versions and generate changelog."
+    command:
+      - bun
+      - changeset
+      - version
+    toolchain: bun
+    inputs:
+      - "packages/*"

@@ -16,6 +16,7 @@ tasks:
     toolchain: bun
     options:
       interactive: true
+      cache: false
 
   version:
     description: "Bump versions and generate changelog."
@@ -26,3 +27,5 @@ tasks:
     toolchain: bun
     inputs:
       - "packages/*"
+    options:
+      cache: false

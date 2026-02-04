@@ -1,0 +1,21 @@
+language: typst
+layer: library
+
+project:
+  name: "sepay"
+  description: "Generate EPC QR codes for SEPA payments."
+  maintainers:
+    - "Lucas Resch"
+
+tasks:
+  release:
+    description: "Prepare release of a new version of the package."
+    script: "rm -rf @out(0) \
+      && mkdir -p @out(0) \
+      && cp --recursive --dereference \
+      src/ gallery/ typst.toml README.md LICENSE @out(0)"
+    outputs:
+      - "build/"
+    options:
+      cache: false
+      runInCI: false

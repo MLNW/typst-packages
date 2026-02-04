@@ -52,7 +52,7 @@ Whether you're creating invoices, resumes, or working with advanced data structu
 
 ### Packages
 
-None, yet.
+- [SEPAY](packages/sepay/README.md): Generate EPC QR codes
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

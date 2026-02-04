@@ -19,7 +19,7 @@ Generate [EPC QR codes](https://en.wikipedia.org/wiki/EPC_QR_code) for SEPA cred
 ## Usage
 
 ```typ
-#import "@preview/sepay:0.1.0": epc-qr-code
+#import "@preview/sepay:0.1.1": epc-qr-code
 
 #epc-qr-code(
   "Max Mustermann",
@@ -108,7 +108,7 @@ Generates an EPC QR code image for SEPA credit transfers.
 Returns the raw EPC QR code payload string (useful for debugging or custom QR code rendering).
 
 ```typ
-#import "@preview/sepay:0.1.0": epc-payload
+#import "@preview/sepay:0.1.1": epc-payload
 
 #let payload-string = epc-payload(
   "Max Mustermann",

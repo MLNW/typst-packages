@@ -50,32 +50,48 @@
     let bic-len = bic.len()
     if bic-len != 8 and bic-len != 11 {
       errors.push(
-        "BIC must be 8 or 11 characters (got " + str(bic-len) + ")",
+        "BIC must be 8 or 11 characters (got "
+          + str(bic)
+          + " with length of "
+          + str(bic-len)
+          + ")",
       )
     }
     // Check for alphanumeric characters only
     let bic-valid = bic.match(regex("^[A-Za-z0-9]+$")) != none
     if not bic-valid {
-      errors.push("BIC must contain only alphanumeric characters")
+      errors.push(
+        "BIC must contain only alphanumeric characters (got " + str(bic) + ")",
+      )
     }
   }
 
   // Validate field lengths
   if is-set(name) and name.len() > 70 {
     errors.push(
-      "Beneficiary name exceeds 70 characters (got " + str(name.len()) + ")",
+      "Beneficiary name exceeds 70 characters (got "
+        + str(name)
+        + " with length of "
+        + str(name.len())
+        + ")",
     )
   }
 
   if is-set(purpose) and purpose.len() > 4 {
     errors.push(
-      "Purpose code exceeds 4 characters (got " + str(purpose.len()) + ")",
+      "Purpose code exceeds 4 characters (got "
+        + str(purpose)
+        + " with length of "
+        + str(purpose.len())
+        + ")",
     )
   }
 
   if is-set(reference) and reference.len() > 35 {
     errors.push(
       "Structured remittance reference exceeds 35 characters (got "
+        + str(reference)
+        + " with length of "
         + str(reference.len())
         + ")",
     )
@@ -84,6 +100,8 @@
   if is-set(text) and text.len() > 140 {
     errors.push(
       "Unstructured remittance text exceeds 140 characters (got "
+        + str(text)
+        + " with length of "
         + str(text.len())
         + ")",
     )
@@ -92,6 +110,8 @@
   if is-set(information) and information.len() > 70 {
     errors.push(
       "Beneficiary to originator information exceeds 70 characters (got "
+        + str(information)
+        + " with length of "
         + str(information.len())
         + ")",
     )
@@ -116,20 +136,18 @@
     }
   }
 
-  // Panic with all collected errors
-  if errors.len() > 0 {
-    let error-list = errors
-      .enumerate()
-      .map(((i, err)) => {
-        str(i + 1) + ". " + err
-      })
-      .join("\n")
+  let error-list = errors
+    .enumerate()
+    .map(((i, err)) => {
+      str(i + 1) + ". " + err
+    })
+    .join("\n\t")
 
-    panic(
-      "EPC payload validation failed with "
-        + str(errors.len())
-        + " error(s):\n"
-        + error-list,
-    )
-  }
+  assert(
+    errors.len() == 0,
+    message: "EPC payload validation failed with "
+      + str(errors.len())
+      + " error(s):\n\t"
+      + error-list,
+  )
 }
